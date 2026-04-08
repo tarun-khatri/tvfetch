@@ -1,5 +1,6 @@
 ---
 name: tvfetch
+version: "1.0.0"
 description: >
   Fetch TradingView market data — historical OHLCV bars, live price streams,
   symbol search, technical indicators, and statistical analysis for any symbol
@@ -13,6 +14,8 @@ argument-hint: >
   BINANCE:BTCUSDT 1D 365 | stream ETH BTC | search bitcoin |
   compare BTC ETH | analyze AAPL | indicators SPX rsi,macd
 allowed-tools: Bash(python *), Bash(pip *), Read, Write, AskUserQuestion
+homepage: https://github.com/tarun-khatri/tvfetch
+user-invocable: true
 ---
 
 # TradingView Market Data Fetcher (tvfetch)
@@ -422,3 +425,23 @@ When invoked non-interactively (from automation, another skill, or with --agent 
 ### Disclaimer
 This tool is for educational and personal use. Using it may violate TradingView's Terms of Service.
 Users are responsible for compliance with applicable terms.
+
+---
+
+## Security & Permissions
+
+**What this skill does:**
+- Connects to TradingView's public WebSocket (`wss://data.tradingview.com`) to fetch OHLCV price data
+- Connects to TradingView's public REST API (`symbol-search.tradingview.com`) for symbol search
+- Reads/writes a local SQLite cache at `~/.tvfetch/cache.db`
+- Reads a local config file at `~/.tvfetch/.env` (if it exists)
+- Optionally saves CSV/JSON/Parquet files to user-specified paths
+- Computes technical indicators and statistics locally (pure Python math, no external calls)
+
+**What this skill does NOT do:**
+- Does NOT send any user data to third parties
+- Does NOT access any files outside of `~/.tvfetch/` and user-specified output paths
+- Does NOT execute arbitrary code or shell commands beyond its own Python scripts
+- Does NOT require any API keys or paid accounts (anonymous mode works fully)
+- Does NOT place trades or modify any exchange accounts
+- Does NOT store or transmit TradingView credentials (auth token stays local in `~/.tvfetch/.env`)

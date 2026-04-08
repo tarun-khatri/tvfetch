@@ -1,12 +1,19 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "tvfetch-skill",
+  "description": "Free TradingView market data — historical OHLCV, live streaming, technical indicators, statistical analysis. No API key required.",
+  "owner": {
+    "name": "Tarun Khatri",
+    "url": "https://github.com/tarun-khatri"
+  },
   "plugins": [
     {
       "name": "tvfetch",
+      "description": "Fetch TradingView market data for any symbol — stocks, crypto, forex, futures, indices, commodities",
       "version": "1.0.0",
       "source": "./",
-      "category": "finance"
+      "category": "finance",
+      "homepage": "https://github.com/tarun-khatri/tvfetch"
     }
   ]
 }

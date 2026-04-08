@@ -45,8 +45,8 @@ tvfetch     = "scripts.main:main"
 tvfetch-cli = "cli.main:cli"
 
 [project.urls]
-Repository = "https://github.com/your-username/tvfetch"
-Issues     = "https://github.com/your-username/tvfetch/issues"
+Repository = "https://github.com/tarun-khatri/tvfetch"
+Issues     = "https://github.com/tarun-khatri/tvfetch/issues"
 
 [tool.setuptools.packages.find]
 where = ["."]
