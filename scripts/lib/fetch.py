@@ -100,6 +100,7 @@ def main() -> int:
     parser.add_argument("--token", help="Auth token override")
     parser.add_argument("--adjustment", default="splits", help="splits|dividends|none")
     parser.add_argument("--extended", action="store_true", help="Extended session (pre/post market)")
+    parser.add_argument("--rows", type=int, default=0, help="Max rows to display (0=all)")
     args = parser.parse_args()
 
     try:
@@ -171,6 +172,15 @@ def main() -> int:
         })
         return EXIT_OK
 
+    # For TTY: show all bars by default. For pipe: show 20 (Claude doesn't need 365 rows)
+    import sys
+    if args.rows > 0:
+        max_rows = args.rows
+    elif hasattr(sys.stdout, "isatty") and sys.stdout.isatty():
+        max_rows = len(df)  # show all in terminal
+    else:
+        max_rows = 20  # limit for Claude
+
     print_fetch_result(
         symbol=result.symbol,
         timeframe=result.timeframe,
@@ -178,6 +188,7 @@ def main() -> int:
         source=result.source,
         auth_mode=result.auth_mode,
         warnings=warnings,
+        max_rows=max_rows,
     )
     return EXIT_OK
 
