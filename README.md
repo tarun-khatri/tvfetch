@@ -6,15 +6,24 @@ Fetch historical OHLCV candlestick data, stream live prices, compute technical i
 
 Works with **stocks, crypto, forex, futures, indices, and commodities** — anything TradingView supports.
 
-```
+```bash
+# Install as Claude Code / AI agent skill (one command)
+npx skills add tarun-khatri/tvfetch
+
+# Or install as Python library
 pip install -e .
-tvfetch fetch BINANCE:BTCUSDT 1D 365
 ```
+
+[![Published on skills.sh](https://img.shields.io/badge/skills.sh-tvfetch-blue)](https://skills.sh)
+[![Published on ClawHub](https://img.shields.io/badge/ClawHub-tvfetch%401.0.0-green)](https://clawhub.com)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Tests: 296 passed](https://img.shields.io/badge/tests-296%20passed-brightgreen)]()
 
 ---
 
 ## Table of Contents
 
+- [Install as AI Skill](#install-as-ai-skill)
 - [Features](#features)
 - [Requirements](#requirements)
 - [Installation](#installation)
@@ -42,6 +51,38 @@ tvfetch fetch BINANCE:BTCUSDT 1D 365
 - [Troubleshooting](#troubleshooting)
 - [Disclaimer](#disclaimer)
 - [License](#license)
+
+---
+
+## Install as AI Skill
+
+tvfetch is published on **skills.sh** and **ClawHub** — install with one command:
+
+### skills.sh (Vercel) — works with Claude Code, Codex, Cursor, Windsurf
+
+```bash
+npx skills add tarun-khatri/tvfetch
+```
+
+### ClawHub — works with Claude Code and OpenClaw
+
+```bash
+clawhub install tvfetch
+```
+
+### Manual install (any AI agent with terminal access)
+
+```bash
+git clone https://github.com/tarun-khatri/tvfetch.git ~/.claude/skills/tvfetch
+cd ~/.claude/skills/tvfetch && pip install -e .
+```
+
+After installing, type `/tvfetch` in Claude Code or just ask naturally:
+```
+"get me Bitcoin price data"
+"compare Apple vs Microsoft this quarter"
+"what's the RSI on EURUSD?"
+```
 
 ---
 
@@ -76,7 +117,7 @@ tvfetch fetch BINANCE:BTCUSDT 1D 365
 ### Option 1: Install from source (recommended)
 
 ```bash
-git clone https://github.com/your-username/tvfetch-skill.git
+git clone https://github.com/tarun-khatri/tvfetch.git
 cd tvfetch-skill
 pip install -e .
 ```
@@ -213,13 +254,19 @@ python scripts/lib/auth_mgr.py instructions
 
 ### As a Claude Code Skill
 
-If you have [Claude Code](https://claude.ai/code) installed:
-
 ```bash
-# Install the skill
-cp -r . ~/.claude/skills/tvfetch/
+# Option 1: One-command install via skills.sh
+npx skills add tarun-khatri/tvfetch
 
-# Then in any Claude Code session, just type:
+# Option 2: One-command install via ClawHub
+clawhub install tvfetch
+
+# Option 3: Manual
+git clone https://github.com/tarun-khatri/tvfetch.git ~/.claude/skills/tvfetch
+```
+
+Then in any Claude Code session, just type:
+```
 /tvfetch BTC daily 1 year
 /tvfetch stream ETH and SOL
 /tvfetch compare Apple vs Microsoft this quarter
@@ -779,8 +826,14 @@ tvfetch works as a [Claude Code](https://claude.ai/code) skill — you can talk 
 ### Install the skill
 
 ```bash
-# Copy to Claude Code skills directory
-cp -r . ~/.claude/skills/tvfetch/
+# Recommended: one-command install
+npx skills add tarun-khatri/tvfetch
+
+# Alternative: ClawHub
+clawhub install tvfetch
+
+# Alternative: manual
+git clone https://github.com/tarun-khatri/tvfetch.git ~/.claude/skills/tvfetch
 ```
 
 ### Use it
