@@ -39,21 +39,40 @@ def main() -> int:
 
     if args.command == "stats":
         df = cache.stats()
-        print("=== CACHE STATS ===")
-        print(f"PATH: {cfg.cache_path}")
-        print(f"SIZE: {cache.size_mb():.2f} MB")
-        print(f"ENTRIES: {len(df)}")
-        if df.empty:
-            print("(empty)")
+        is_tty = hasattr(sys.stdout, "isatty") and sys.stdout.isatty()
+
+        if is_tty:
+            from rich.console import Console
+            from rich.table import Table as RTable
+            from rich.panel import Panel
+            from rich import box
+            console = Console(highlight=False)
+            if df.empty:
+                console.print(Panel("  Cache is empty.", title=f" Cache │ {cache.size_mb():.2f} MB ", border_style="cyan", box=box.ROUNDED))
+            else:
+                table = RTable(title=f"Cache ({cache.size_mb():.2f} MB) — {len(df)} entries", box=box.ROUNDED, border_style="cyan", title_style="bold cyan")
+                table.add_column("Symbol", style="bold cyan")
+                table.add_column("TF", style="dim")
+                table.add_column("Bars", justify="right")
+                table.add_column("Oldest", style="dim")
+                table.add_column("Newest", style="dim")
+                table.add_column("Fetched", style="dim")
+                for _, row in df.iterrows():
+                    table.add_row(str(row["symbol"]), str(row["timeframe"]), str(row["bars"]), str(row["oldest"]), str(row["newest"]), str(row["fetched_at"]))
+                console.print(table)
         else:
-            print(f"\n{'Symbol':<25} {'TF':<6} {'Bars':>8} {'Oldest':<12} {'Newest':<12} {'Fetched':<20}")
-            print("-" * 90)
-            for _, row in df.iterrows():
-                print(
-                    f"{row['symbol']:<25} {row['timeframe']:<6} {row['bars']:>8} "
-                    f"{row['oldest']:<12} {row['newest']:<12} {row['fetched_at']:<20}"
-                )
-        print("=== END ===")
+            print("=== CACHE STATS ===")
+            print(f"PATH: {cfg.cache_path}")
+            print(f"SIZE: {cache.size_mb():.2f} MB")
+            print(f"ENTRIES: {len(df)}")
+            if df.empty:
+                print("(empty)")
+            else:
+                print(f"\n{'Symbol':<25} {'TF':<6} {'Bars':>8} {'Oldest':<12} {'Newest':<12} {'Fetched':<20}")
+                print("-" * 90)
+                for _, row in df.iterrows():
+                    print(f"{row['symbol']:<25} {row['timeframe']:<6} {row['bars']:>8} {row['oldest']:<12} {row['newest']:<12} {row['fetched_at']:<20}")
+            print("=== END ===")
 
     elif args.command == "clear":
         if not args.all and not args.symbol:

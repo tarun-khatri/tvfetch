@@ -154,18 +154,39 @@ def show_config(config: Config | None = None) -> None:
     valid, reason = validate_token(cfg.auth_token)
     token_preview = cfg.auth_token[:20] + "..." if len(cfg.auth_token) > 20 else cfg.auth_token
 
-    print("=== TVFETCH CONFIG ===")
-    print(f"AUTH_MODE: {'anonymous' if cfg.is_anonymous else 'token'}")
-    print(f"AUTH_SOURCE: {cfg.auth_source}")
-    print(f"TOKEN_PREVIEW: {token_preview}")
-    print(f"TOKEN_VALID: {valid} ({reason})")
-    print(f"CACHE_PATH: {cfg.cache_path}")
-    print(f"MOCK_MODE: {cfg.mock_mode}")
-    print(f"FALLBACK: {cfg.fallback_enabled}")
-    print(f"TIMEOUT: {cfg.timeout}s")
-    if cfg.proxy_url:
-        print(f"PROXY: {cfg.proxy_url}")
-    print("=== END ===")
+    if hasattr(sys.stdout, "isatty") and sys.stdout.isatty():
+        from rich.console import Console
+        from rich.panel import Panel
+        from rich.text import Text
+        from rich import box
+        console = Console(highlight=False)
+        body = Text()
+        mode_clr = "yellow" if cfg.is_anonymous else "green"
+        body.append(f"  Auth: ", style="dim")
+        body.append(f"{'anonymous' if cfg.is_anonymous else 'authenticated'}", style=mode_clr)
+        body.append(f" (source: {cfg.auth_source})\n", style="dim")
+        body.append(f"  Token: {token_preview}\n", style="dim")
+        valid_clr = "green" if valid else "red"
+        body.append(f"  Valid: ", style="dim")
+        body.append(f"{valid} ({reason})\n", style=valid_clr)
+        body.append(f"  Cache: {cfg.cache_path}\n", style="dim")
+        body.append(f"  Mock: {cfg.mock_mode}   Fallback: {cfg.fallback_enabled}   Timeout: {cfg.timeout}s\n", style="dim")
+        if cfg.proxy_url:
+            body.append(f"  Proxy: {cfg.proxy_url}\n", style="dim")
+        console.print(Panel(body, title=" tvfetch Config ", border_style="cyan", box=box.ROUNDED, padding=(0, 1)))
+    else:
+        print("=== TVFETCH CONFIG ===")
+        print(f"AUTH_MODE: {'anonymous' if cfg.is_anonymous else 'token'}")
+        print(f"AUTH_SOURCE: {cfg.auth_source}")
+        print(f"TOKEN_PREVIEW: {token_preview}")
+        print(f"TOKEN_VALID: {valid} ({reason})")
+        print(f"CACHE_PATH: {cfg.cache_path}")
+        print(f"MOCK_MODE: {cfg.mock_mode}")
+        print(f"FALLBACK: {cfg.fallback_enabled}")
+        print(f"TIMEOUT: {cfg.timeout}s")
+        if cfg.proxy_url:
+            print(f"PROXY: {cfg.proxy_url}")
+        print("=== END ===")
 
 
 def check_auth_quiet() -> None:

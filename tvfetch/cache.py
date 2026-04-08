@@ -75,16 +75,20 @@ class Cache:
 
     # ── Read ──────────────────────────────────────────────────────────────────
 
-    def is_fresh(self, symbol: str, timeframe: str) -> bool:
-        """Return True if cached data is recent enough to skip a network fetch."""
+    def is_fresh(self, symbol: str, timeframe: str, min_bars: int = 0) -> bool:
+        """Return True if cached data is recent enough AND has enough bars."""
         row = self._conn.execute(
-            "SELECT fetched_at FROM fetch_log WHERE symbol=? AND timeframe=?",
+            "SELECT fetched_at, bar_count FROM fetch_log WHERE symbol=? AND timeframe=?",
             (symbol, timeframe),
         ).fetchone()
         if not row:
             return False
         age = time.time() - row[0]
-        return age < _stale_seconds(timeframe)
+        if age >= _stale_seconds(timeframe):
+            return False
+        if min_bars > 0 and row[1] < min_bars:
+            return False
+        return True
 
     def load(self, symbol: str, timeframe: str) -> pd.DataFrame | None:
         """Return cached DataFrame or None if not cached."""

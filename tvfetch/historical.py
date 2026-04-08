@@ -73,7 +73,7 @@ def fetch(
     auth_mode = "anonymous" if is_anonymous(auth_token) else "token"
 
     # --- Cache check ---
-    if use_cache and _cache.is_fresh(symbol, timeframe):
+    if use_cache and _cache.is_fresh(symbol, timeframe, min_bars=bars):
         cached_df = _cache.load(symbol, timeframe)
         if cached_df is not None:
             log.debug("Cache hit for %s/%s (%d rows)", symbol, timeframe, len(cached_df))
@@ -220,7 +220,7 @@ def fetch_multi(
 
     if use_cache:
         for sym in symbols:
-            if _cache.is_fresh(sym, timeframe):
+            if _cache.is_fresh(sym, timeframe, min_bars=bars):
                 cached_df = _cache.load(sym, timeframe)
                 if cached_df is not None:
                     log.debug("Cache hit for %s/%s", sym, timeframe)

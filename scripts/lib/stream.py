@@ -86,10 +86,8 @@ def main() -> int:
         direction = "+" if bar.close >= prev else "-"
 
         ts = bar.timestamp.strftime("%H:%M:%S")
-        print(
-            f"  {sym:<25} {bar.close:>12.4f}  {bar.change_pct:>+8.2f}%"
-            f"  vol={bar.volume:>12.2f}  {ts} [{direction}]"
-        )
+        from scripts.lib.formatter import print_stream_tick
+        print_stream_tick(sym, bar.close, bar.change_pct, bar.volume, ts, direction)
 
         # Alert checks
         if args.alert_above and bar.close > args.alert_above:
