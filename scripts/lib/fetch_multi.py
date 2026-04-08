@@ -77,13 +77,18 @@ def main() -> int:
             result.to_csv(str(path))
             print(f"Saved {sym}: {len(result):,} bars -> {path}")
         else:
+            import sys
+            if hasattr(sys.stdout, "isatty") and sys.stdout.isatty():
+                rows = len(df)
+            else:
+                rows = 5
             print_fetch_result(
                 symbol=result.symbol,
                 timeframe=result.timeframe,
                 df=df,
                 source=result.source,
                 auth_mode=result.auth_mode,
-                max_rows=5,  # fewer rows per symbol in multi mode
+                max_rows=rows,
             )
             print()  # blank line between symbols
 
