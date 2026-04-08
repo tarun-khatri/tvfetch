@@ -1,0 +1,12 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "tvfetch-skill",
+  "plugins": [
+    {
+      "name": "tvfetch",
+      "version": "1.0.0",
+      "source": "./",
+      "category": "finance"
+    }
+  ]
+}

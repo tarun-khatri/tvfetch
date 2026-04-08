@@ -1,0 +1,39 @@
+{
+  "results": [
+    {
+      "symbol": "BINANCE:BTCUSDT",
+      "description": "Bitcoin / TetherUS",
+      "exchange": "BINANCE",
+      "type": "crypto",
+      "currency": "USDT"
+    },
+    {
+      "symbol": "COINBASE:BTCUSD",
+      "description": "Bitcoin / US Dollar",
+      "exchange": "COINBASE",
+      "type": "crypto",
+      "currency": "USD"
+    },
+    {
+      "symbol": "BINANCE:BTCUSDC",
+      "description": "Bitcoin / USD Coin",
+      "exchange": "BINANCE",
+      "type": "crypto",
+      "currency": "USDC"
+    },
+    {
+      "symbol": "BYBIT:BTCUSDT",
+      "description": "Bitcoin / TetherUS",
+      "exchange": "BYBIT",
+      "type": "crypto",
+      "currency": "USDT"
+    },
+    {
+      "symbol": "CRYPTOCAP:BTC",
+      "description": "Bitcoin Market Cap",
+      "exchange": "CRYPTOCAP",
+      "type": "crypto",
+      "currency": "USD"
+    }
+  ]
+}

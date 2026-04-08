@@ -1,0 +1,11 @@
+{
+  "name": "tvfetch",
+  "version": "1.0.0",
+  "description": "Free TradingView market data — historical OHLCV, live streaming, technical indicators, statistical analysis. No API key required.",
+  "author": {
+    "name": "tvfetch contributors",
+    "homepage": "https://github.com/tvfetch/tvfetch-skill"
+  },
+  "skills": ["./"],
+  "hooks": {}
+}

@@ -1,0 +1,6 @@
+{
+  "error": true,
+  "error_type": "TvSymbolNotFoundError",
+  "symbol": "FAKE:XXXX",
+  "message": "Symbol not found: FAKE:XXXX"
+}

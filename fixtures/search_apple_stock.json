@@ -1,0 +1,39 @@
+{
+  "results": [
+    {
+      "symbol": "NASDAQ:AAPL",
+      "description": "Apple Inc.",
+      "exchange": "NASDAQ",
+      "type": "stock",
+      "currency": "USD"
+    },
+    {
+      "symbol": "NASDAQ:AAPLW",
+      "description": "Apple Inc. Warrants",
+      "exchange": "NASDAQ",
+      "type": "stock",
+      "currency": "USD"
+    },
+    {
+      "symbol": "LSE:AAPL",
+      "description": "Apple Inc. (London)",
+      "exchange": "LSE",
+      "type": "stock",
+      "currency": "GBP"
+    },
+    {
+      "symbol": "FWB:APC",
+      "description": "Apple Inc. (Frankfurt)",
+      "exchange": "FWB",
+      "type": "stock",
+      "currency": "EUR"
+    },
+    {
+      "symbol": "TSX:AAPD",
+      "description": "Apple Inc. CDR (Hedged)",
+      "exchange": "TSX",
+      "type": "stock",
+      "currency": "CAD"
+    }
+  ]
+}

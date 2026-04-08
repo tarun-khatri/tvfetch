@@ -1,0 +1,11 @@
+assets/
+tests/
+docs/
+fixtures/
+plans/
+*.log
+*.pyc
+__pycache__/
+tvfetch.egg-info/
+.pytest_cache/
+.git/
